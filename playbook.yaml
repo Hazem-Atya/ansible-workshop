@@ -1,0 +1,34 @@
+- name: My first play
+  hosts: ws1
+  become: true # wali root
+  tasks:
+    - name: Print message
+      command: bash -c 'echo "Hello hazem" >> ~/file.txt'
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present # state li lzm ya5ltel'ha
+        update_cache: true
+    - name: Create www directory if it doesn't exist
+      file:
+        path: /home/{{ansible_user}}/www
+        state: directory
+    - name: copy nginx configuration
+      template:
+        src: ./website.j2
+        dest: /etc/nginx/sites-available/website.conf
+    - name: Enable website
+      file:
+        src: /etc/nginx/sites-available/website.conf
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+
+    - name: start nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: true # yetlança ma3 il boot
+    - name: copy index.html
+      copy:
+        src: ./www/index.html
+        dest: /home/{{ansible_user}}/www/
