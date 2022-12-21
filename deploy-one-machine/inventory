@@ -1,0 +1,1 @@
+ws1 ansible_host=20.235.65.118 ansible_user=azureuser ansible_ssh_private_key_file=/mnt/d/Donwloads/ansible_key.pem

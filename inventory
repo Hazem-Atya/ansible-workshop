@@ -1,1 +1,0 @@
-ws1 ansible_host=51.120.69.55 ansible_user=azureuser ansible_ssh_private_key_file=./my_key.pem
