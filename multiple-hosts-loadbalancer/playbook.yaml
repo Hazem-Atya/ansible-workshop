@@ -1,0 +1,56 @@
+# first playbook
+- name: WebserverPlaybook # the name of the playbook
+  hosts: webservers   # the group
+  become: true
+  tasks:
+    # - debug: var=ansible_hostname  => prints ansible_hotsname for everyhost 
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: true
+    - name: create www directory if they don't exist
+      file:
+        path: /home/{{ ansible_user }}/www
+        state: directory
+    - name: Copy nginx configuration
+      template:
+        src: ./website.j2
+        dest: /etc/nginx/sites-available/website.conf
+    - name: Enable the website
+      file:
+        src: /etc/nginx/sites-available/website.conf
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+    - name: Start nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: true
+    - name: Copy index.html
+      template:
+        src: ./www/index.j2
+        dest: /home/{{ ansible_user }}/www/index.html
+
+# second playbook
+- name: LoadBalancerPlaybook
+  hosts: loadbalancer
+  become: true
+  vars:
+    haproxy_algorithm: roundrobin
+  tasks:
+    - debug: var=hostvars["ws1"].ansible_host # Note: We use this for debug purposes
+    - name: Install HAProxy
+      apt:
+        name: haproxy
+        state: present
+        update_cache: true
+    - name: Put HAProxy configuration
+      template:
+        src: ./haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+    - name: Restart and enable HAProxy
+      service:
+        name: haproxy
+        state: restarted
+        enabled: true
