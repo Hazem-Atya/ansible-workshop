@@ -21,11 +21,11 @@ Verify that the host is reachable via ssh (u may need to do chmod o -w . )
 
 ![image](https://user-images.githubusercontent.com/53778545/208709986-a14e1c05-80b5-4767-9bd9-fc5fd040eb5b.png)
  
-We need to add the key
+We need to add the key  (Fi nafs il staaaar)
+
 
 ![image](https://user-images.githubusercontent.com/53778545/208710009-8922927d-3724-41a1-8c59-efacf9c7b608.png)
  
-(Fi nafs il staaaar)
 
  ![image](https://user-images.githubusercontent.com/53778545/208710072-d2056b9d-0f1b-4ea5-8202-17822f3f0e2c.png)
 
@@ -36,4 +36,7 @@ We need to add the key
 
 Playbook => task => command 
 
-`ansible-playbook playbook.yaml`             
+`ansible-playbook playbook.yaml`     
+
+![Untitled Diagram](https://user-images.githubusercontent.com/53778545/208862826-f5693a57-d9cb-4121-884e-860d63298778.jpg)
+ 
