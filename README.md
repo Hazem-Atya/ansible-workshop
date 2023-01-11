@@ -17,7 +17,7 @@ Inventory
 Verify that the host is reachable via ssh (u may need to do chmod o -w . )
 
 `ansible -m ping all`     
-(this is not our usual ping, the usual ping doesn’t have w port but this command checks ssh connection)
+(this is not our usual ping, the usual ping doesn’t have a port but this command checks ssh connection)
 
 ![image](https://user-images.githubusercontent.com/53778545/208709986-a14e1c05-80b5-4767-9bd9-fc5fd040eb5b.png)
  
